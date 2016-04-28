@@ -7,9 +7,9 @@ Bite-size news app
 3. open http://localhost:3000 in browser
 
 ### Endpoints
-/
-/users
-/articles
+* /
+* /users
+* /articles
 
 ### Links
 * Mongoose getting started
