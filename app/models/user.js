@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 var userSchema = new Schema({
     name: String,
     birthdate: Date,
-    tags: Array,
+    tags: Schema.Types.Mixed,
     languages: Array,
     profileimage: String
 });
