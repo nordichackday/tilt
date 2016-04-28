@@ -20,20 +20,24 @@ router.get('/', function(req, res, next) {
 /* GET users listing. */
 router.post('/:userid', function(req, res, next) {
 
-  var userid = req.params.userid;
-  var limit = req.body.limit;
-  var id_pos = req.body.id_pos;
-  var id_prev = req.body.id_prev;
+  var userid = req.params.userid || 0;
+  var limit = req.body.limit || 5;
+  var id_pos = req.body.id_pos || [];
+  var id_prev = req.body.id_prev || [];
 
   Article.
-  find({
-    _id: { $nin: id_prev }
-  }).
-  limit(limit).
-  exec(function(err, articles) {
-    if (err) throw err;
-    res.send(articles);
+    find({
+      _id: { $nin: id_prev }
+    }).
+    limit(limit).
+    exec(function(err, articles) {
+      "use strict";
+      if (err) console.log(err);
+      console.log(articles);
+      res.send(articles);
   });
+
+
 });
 
 module.exports = router;
