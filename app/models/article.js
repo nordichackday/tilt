@@ -5,11 +5,13 @@ var Schema = mongoose.Schema;
 // create a schema
 var articleSchema = new Schema({
     author: String,
-    bodytext: String,
     headline: String,
+    bodytext: String,
     image: String,
     tags: Array,
-    publicationdatetime: Date
+    publicationdate: Date,
+    language: String,
+    originalURL: String
 });
 
 // the schema is useless so far
