@@ -10,5 +10,8 @@ Bite-size news app
 * Mongoose getting started
 [https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications](https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications)
 
+* Mongoose Data Types
+[http://mongoosejs.com/docs/schematypes.html](http://mongoosejs.com/docs/schematypes.html)
+
 *  Markdown cheat sheet
 [http://assemble.io/docs/Cheatsheet-Markdown.html](http://assemble.io/docs/Cheatsheet-Markdown.html)
