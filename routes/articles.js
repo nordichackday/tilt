@@ -5,15 +5,21 @@ var Article = require('../app/models/article');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
 
+  var limit = req.query.limit;
+  console.log("limit", limit);
+
   // get all the users
-  //Article.find({}, 'author bodytext headline image tags', function(err, articles) {
-  Article.find({}, function(err, articles) {
-    if (err) throw err;
+  Article
+      .find({})
+      .limit(limit)
+      .exec(
+          function(err, articles) {
+            if (err) throw err;
 
-    console.log(articles);
-    res.send(articles);
-  });
-
+            //console.log(articles);
+            res.send(articles);
+          }
+      );
 });
 
 module.exports = router;
