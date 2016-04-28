@@ -1,17 +1,26 @@
+var userID = "57222856c80eb66928eacb1a";
+
+
 angular
     .module('card-stack-demo', ['gajus.swing'])
-    .controller('card-stack-playground', function ($scope) {
-        $scope.cards = [
-            { headline: "Search warrant issued at musician's home", bodytext: 'A search warrant was obtained in relation to the home of Prince shortly after he died, court documents show.'},
-            { headline: "Five strange stories about mysterious musician", bodytext: "Prince, who has died at his home in Minnesota, was known for his cross-genre pop music and multiple reinventions - but it was also the sense of mystery around the man that delighted his fans."},
-            { headline: "Prince the stage magician", bodytext: "There is 'no reason to believe' that Prince's death was suicide, the sheriff of the Minnesota county where the singer had his home has said after a post-mortem examination."},
+    .controller('card-stack-playground', function ($scope, $http) {
+        $scope.cards = [];
 
-        ];
-
+            
+        $scope.getNext = function(){
+            var limit = 5;
+            
+            $http.get("/articles?limit=4")
+                .then(function(response) {
+                    for (var i in response.data) {
+                        $scope.cards.push(response.data[i]);
+                    }
+                   
+                });            
+        }
 
         $scope.throwout = function (eventName, eventObject) {
-           // console.log('DELETE throwout', eventObject);
-           console.log("DELETE")
+            this.remove();
         };
 
         $scope.throwoutleft = function (eventName, eventObject) {
@@ -27,6 +36,18 @@ angular
             console.log(eventObject.throwDirection )
         };
 
+        $scope.remove = function () {
+            $scope.cards = $scope.cards.splice(0, $scope.cards.length-1);
+            $scope.$apply();
+            
+            if ($scope.cards.length === 0 ) {
+               this.getNext();
+            } 
+        }
+        
+
+
+        $scope.getNext();
 
 /*
         $scope.throwin = function (eventName, eventObject) {
