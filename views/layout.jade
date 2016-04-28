@@ -1,7 +1,21 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+	head
+		title= title
+		meta(charset='utf-8')
+		meta( name="apple-mobile-web-app-capable", content="yes")
+		link(href="https://fonts.googleapis.com/css?family=Open+Sans:400", rel="stylesheet", type="text/css")
+		link(rel="stylesheet", href="/css/card-stack.css")
+		link(rel="icon", href="data:;base64,iVBORw0KGgo=")
+		meta(name="viewport", content="width=device-width, initial-scale=1,maximum-scale=1")
+		
+	body
+		block content
+
+		//script( src="/js/swing.js")
+		//script( src="/js/classList.js")
+		//script( src="/js/card-stack.js")
+
+		script( src="/js/c_angular.js")
+		script( src="/js/c_a_swing.js")
+		script( src="/js/c_stack.js")

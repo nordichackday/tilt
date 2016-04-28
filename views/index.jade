@@ -1,5 +1,32 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	div(ng-app="card-stack-demo")
+		div(id="viewport",  ng-controller="card-stack-playground")
+			ul(class="stack", swing-stack)
+
+
+				li(
+					class="item",
+					style="background-image:url(/img/lego_bg.jpeg) ",
+					swing-card,
+					swing-on-throwout="throwout(eventName, eventObject)",
+					swing-on-throwoutleft="throwoutleft(eventName, eventObject)",
+					swing-on-throwoutright="throwoutright(eventName, eventObject)",
+					swing-on-throwin="throwin(eventName, eventObject)",
+					swing-on-dragstart="dragstart(eventName, eventObject)",
+					swing-on-dragmove="dragmove(eventName, eventObject)",
+					swing-on-dragend="dragend(eventName, eventObject)",
+					ng-repeat="card in cards",
+					ng-class="card.name"
+					)
+					h3( class="noselect")
+						{{card.symbol}} Lego admits 'mistake' in Ai Weiwei row
+					div( class="grad")
+						p( class="noselect")
+							Vice-Chairman Kirk Kristiansen told The Wall Street Journal an employee had 	misinterpreted the company's policy on political neutrality.
+							In October, Ai said his request was declined because Lego considered his planned exhibition to be too political.
+							The artist is known for criticism of the Chinese government.
+
+			
+
