@@ -2,10 +2,10 @@ angular
     .module('card-stack-demo', ['gajus.swing'])
     .controller('card-stack-playground', function ($scope) {
         $scope.cards = [
-            {name: 'clubs', symbol: '♣'},
-            {name: 'diamonds', symbol: '♦'},
-            {name: 'hearts', symbol: '♥'},
-            {name: 'spades', symbol: '♠'}
+            { headline: "Search warrant issued at musician's home", bodytext: 'A search warrant was obtained in relation to the home of Prince shortly after he died, court documents show.'},
+            { headline: "Five strange stories about mysterious musician", bodytext: "Prince, who has died at his home in Minnesota, was known for his cross-genre pop music and multiple reinventions - but it was also the sense of mystery around the man that delighted his fans."},
+            { headline: "Prince the stage magician", bodytext: "There is 'no reason to believe' that Prince's death was suicide, the sheriff of the Minnesota county where the singer had his home has said after a post-mortem examination."},
+
         ];
 
 
