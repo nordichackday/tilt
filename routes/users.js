@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../app/models/user');
-var Article = require('../app/models/article');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -21,21 +20,31 @@ router.get('/', function(req, res, next) {
 router.post('/:userid', function(req, res, next) {
 
   var userid = req.params.userid || 0;
-  var limit = req.body.limit || 5;
-  var id_pos = req.body.id_pos || [];
-  var id_prev = req.body.id_prev || [];
+  var newTags = req.body.tags || [];
 
-  Article.
-    find({
-      _id: { $nin: id_prev }
-    }).
-    limit(limit).
-    exec(function(err, articles) {
-      "use strict";
-      if (err) console.log(err);
-      console.log(articles);
-      res.send(articles);
-  });
+	User.find({_id: userid}, 'tags', function(err, tags) {
+		if (err) console.log(err);
+
+		newTags.forEach(function(tag) {
+			if (tags[0].tags.hasOwnProperty(tag)) {
+				tags[0].tags[tag] += 1;
+			}
+			else {
+				tags[0].tags[tag] = 1;
+			}
+		});
+
+		console.log(tags[0].tags);
+  	User.update({_id: userid}, {$set: { 'tags' : tags[0].tags }}).
+		exec(function(err, result) {
+	    "use strict";
+	    if (err) console.log(err);
+	    console.log(result);
+	    res.send(result);
+		});
+
+
+	});
 
 
 });
