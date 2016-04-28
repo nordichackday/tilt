@@ -1,17 +1,16 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../app/models/user');
+var Article = require('../app/models/article');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
 
   // get all the users
-  User.find({}, function(err, users) {
+  Article.find({}, function(err, articles) {
     if (err) throw err;
 
-    console.log(users);
-    res.send(users);
-
+    console.log(articles);
+    res.send(articles);
   });
 
 });
