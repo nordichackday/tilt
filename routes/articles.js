@@ -6,6 +6,7 @@ var Article = require('../app/models/article');
 router.get('/', function(req, res, next) {
 
   // get all the users
+  //Article.find({}, 'author bodytext headline image tags', function(err, articles) {
   Article.find({}, function(err, articles) {
     if (err) throw err;
 
