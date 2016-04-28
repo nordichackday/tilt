@@ -8,7 +8,7 @@ var articleSchema = new Schema({
     bodytext: String,
     headline: String,
     image: String,
-    tags: array,
+    tags: Array,
     publicationdatetime: Date
 });
 
