@@ -22,8 +22,16 @@ router.post('/:userid', function(req, res, next) {
 
   var userid = req.params.userid || 0;
   var limit = req.body.limit || 5;
-  var id_pos = req.body.id_pos || [];
-  var id_prev = req.body.id_prev || [];
+  var id_pos = req.body.id_pos || "";
+  var id_prev = req.body.id_prev || "";
+
+  id_pos = id_pos.split(",");
+  id_prev = id_prev.split(",");
+
+  console.log("userid", userid);
+  console.log("limit", limit);
+  console.log("id_pos", id_pos);
+  console.log("id_prev", id_prev);
 
   Article.
     find({
@@ -33,7 +41,6 @@ router.post('/:userid', function(req, res, next) {
     exec(function(err, articles) {
       "use strict";
       if (err) console.log(err);
-      console.log(articles);
       res.send(articles);
   });
 
