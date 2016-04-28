@@ -10,6 +10,9 @@ var users = require('./routes/users');
 
 var app = express();
 
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://tiltuser:password@ds021691.mlab.com:21691/tiltdb');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
