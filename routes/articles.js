@@ -25,9 +25,6 @@ router.get('/', function(req, res, next) {
     }
   });
 
-  // pass article ids to /users -> update user data
-  request.post('http://localhost:3000/users/' + userid, id_pos);
-
   id_prev.forEach(function(id) {
     "use strict";
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -36,6 +33,7 @@ router.get('/', function(req, res, next) {
   });
 
   // hent tags fra hvert id
+	var userUpdateTags = [];
   var tags = {};
   Article
       .find({
@@ -47,16 +45,21 @@ router.get('/', function(req, res, next) {
         //console.log(articles);
 
         articles.forEach(function(art) {
-          console.log(art.tags);
-            art.tags.forEach(function(tag) {
-              if (tags.hasOwnProperty(tag)) {
-                tags[tag] += 1;
-              }
-              else {
-                tags[tag] = 1;
-              }
-            });
-        });
+					art.tags.forEach(function(tag) {
+						userUpdateTags.push(tag);
+						if (tags.hasOwnProperty(tag)) {
+							tags[tag] += 1;
+						}
+						else {
+							tags[tag] = 1;
+						}
+					});
+				});
+
+
+				// pass article ids to /users -> update user data
+				console.log(userUpdateTags);
+				request.post('http://localhost:3000/users/' + userid, {'tags':userUpdateTags});
 
         var numVotes = 0;
         var tag = "";
@@ -78,7 +81,21 @@ router.get('/', function(req, res, next) {
           .exec(function(err, articles) {
             "use strict";
             if (err) console.log(err);
-            res.send(articles);
+						if(articles.length >= 5) {
+            	res.send(articles);
+						}
+						else { console.log("Need to find more articles");
+							Article
+			          .find({
+			            _id: { $nin: id_prev }
+			          })
+			          .limit(limit)
+								.exec(function(err, articles) {
+			            "use strict";
+									if (err) console.log(err);
+									res.send(articles);
+								});
+						}
           });
       });
 });
