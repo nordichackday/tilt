@@ -2,69 +2,72 @@ var userID = "57222856c80eb66928eacb1a";
 
 
 angular
-    .module('card-stack-demo', ['gajus.swing'])
-    .controller('card-stack-playground', function ($scope, $http) {
-        $scope.cards = [];
+	.module('card-stack-demo', ['gajus.swing'])
+	.controller('card-stack-playground', function ($scope, $http) {
 
-            
-        $scope.getNext = function(){
-            var limit = 5;
-            
-            $http.get("/articles?limit=4")
-                .then(function(response) {
-                    for (var i in response.data) {
-                        $scope.cards.push(response.data[i]);
-                    }
-                   
-                });            
-        }
+		var _scope = this;
 
-        $scope.throwout = function (eventName, eventObject) {
-            this.remove();
-        };
+		$scope.cards = [];
+		var usedArticles = [],
+			posArticles = [],
+			limit = 5,
+			dir = 0,prev = 0,
+			url;
+			
+		$scope.getNext = function(){
+			
+			if (usedArticles.length > 50) {
+				usedArticles = usedArticles.splice(posArticles.length-50,50);
+			}
+			if (posArticles.length > 5) {
+				posArticles = posArticles.splice(posArticles.length-5,5);
+			}
+			url = "/articles?limit=" + limit + "&id_pos=" + posArticles.toString() + "&id_prev=" + usedArticles.toString();
+			$http.get(url)
+				.then(function(response) {
+					for (var i in response.data) {
+						usedArticles.push(response.data[i]._id);
+						$scope.cards.push(response.data[i]);
+					}
 
-        $scope.throwoutleft = function (eventName, eventObject) {
-             console.log("MINUS")
-           // console.log('throwoutleft', eventObject);
-        };
+				});            
+		}
 
-        $scope.throwoutright = function (eventName, eventObject) {
-             console.log("plus")
-            console.log('throwoutright', eventObject);
-        };
-        $scope.dragmove = function (eventName, eventObject) {
-            console.log(eventObject.throwDirection )
-        };
+		$scope.throwout = function (eventName, eventObject) {
+			this.remove();
+		};
+		$scope.throwin = function (eventName, eventObject) {
+			dir = 0,prev = 0;
+		};        
 
-        $scope.remove = function () {
-            $scope.cards = $scope.cards.splice(0, $scope.cards.length-1);
-            $scope.$apply();
-            
-            if ($scope.cards.length === 0 ) {
-               this.getNext();
-            } 
-        }
-        
+		$scope.throwoutright = function (eventName, eventObject) {
+			posArticles.push(eventObject.target.attributes["ng-id"].value)
+		};
 
+		$scope.dragmove = function (eventName, eventObject) {
+			dir = eventObject.throwDirection;
+			if (dir !== prev) {
+				if (dir === -1) {
+					$scope.mood = "dislike";
+					$scope.$apply();
+				}
+				if (dir === 1) {
+					$scope.mood = "like";
+					$scope.$apply();
+				}
+			}
+			prev = dir;
+		};
 
-        $scope.getNext();
+		$scope.remove = function () {
+			$scope.cards = $scope.cards.splice(0, $scope.cards.length-1);
+			$scope.$apply();
+		
+			if ($scope.cards.length === 0 ) {
+			   this.getNext();
+			} 
+		}
+		$scope.getNext();
 
-/*
-        $scope.throwin = function (eventName, eventObject) {
-            console.log('throwin', eventObject);
-        };
-
-        $scope.dragstart = function (eventName, eventObject) {
-            console.log('dragstart', eventObject);
-        };
-
-        $scope.dragmove = function (eventName, eventObject) {
-            console.log('dragmove', eventObject);
-        };
-
-        $scope.dragend = function (eventName, eventObject) {
-            console.log('dragend', eventObject);
-        };
-*/
-    });
+	});
 

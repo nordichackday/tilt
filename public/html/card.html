@@ -1,16 +1,4 @@
-extends layout
-
-block content
-	div(ng-app="card-stack-demo")
-	
-		card-dir
-	
-		div(id="viewport",  ng-controller="card-stack-playground")
-			ul(class="stack", swing-stack)
-
-
-				li(
-					class="item ng-class:mood;",
+<li class="item ng-class:mood;",
 					style="background-image:url(/img/lego_bg.jpeg) ",
 					swing-card,
 					swing-on-throwout="throwout(eventName, eventObject)",
@@ -24,13 +12,15 @@ block content
 					
 					ng-id="{{card._id}}"
 					)
-					div( class="moodSelect")
-						div
-					{{card.img}}
-					div( class="grad")
-						h3( class="noselect")
-							{{card.headline}} 
-						p( class="noselect")
+					<div class="moodSelect">
+						<div><div>
+					</div>
+					<div class="grad">
+						<h3 class="noselect">
+							{{card.headline}}
+						</h3>
+						<p class="noselect">
 							{{card.bodytext}}
-
-			
+						</p>
+					</div>
+</li>

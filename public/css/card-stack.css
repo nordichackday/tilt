@@ -33,8 +33,31 @@ body {
     background-size: 100% auto;
     background-repeat: no-repeat;
     padding:0;
+   
+    
+}
+#viewport li div.moodSelect {
+    /*display:none;*/
+    position: relative;    
+}
+#viewport li:last-child div.moodSelect div {
+    position: absolute;
+    display:none;
+    width:66px;
+    height:66px;
 }
 
+#viewport li.like div.moodSelect  div {
+    background: transparent url(/graphics/like.png) ;
+    right:0;
+    display:block;
+}
+
+#viewport li.dislike div.moodSelect div {
+    background: transparent url(/graphics/dislike.png) ;
+     left:0;
+     display:block;
+}
 
 #viewport li img {
     width: 100%;
