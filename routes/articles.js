@@ -81,7 +81,7 @@ router.get('/', function(req, res, next) {
           .exec(function(err, articles) {
             "use strict";
             if (err) console.log(err);
-						if(articles.length >= 5) {
+						if(articles.length >= limit) {
             	res.send(articles);
 						}
 						else { console.log("Need to find more articles");
