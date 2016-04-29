@@ -3,6 +3,7 @@ var userID = "57222856c80eb66928eacb1a";
 
 angular
 	.module('card-stack-demo', ['gajus.swing'])
+
 	.controller('card-stack-playground', function ($scope, $http) {
 
 		var _scope = this;
@@ -26,18 +27,24 @@ angular
 			$http.get(url)
 				.then(function(response) {
 					for (var i in response.data) {
+						response.data[i].style = "style_" + Math.floor((Math.random()*4)+1);
 						usedArticles.push(response.data[i]._id);
 						$scope.cards.push(response.data[i]);
 					}
-
 				});            
 		}
 
 		$scope.throwout = function (eventName, eventObject) {
+			dir = 0,prev = 0;
+			$scope.mood = "neutral";
+			$scope.$apply();
 			this.remove();
 		};
 		$scope.throwin = function (eventName, eventObject) {
 			dir = 0,prev = 0;
+			$scope.mood = "neutral";
+			$scope.$apply();
+
 		};        
 
 		$scope.throwoutright = function (eventName, eventObject) {
@@ -67,6 +74,7 @@ angular
 			   this.getNext();
 			} 
 		}
+		
 		$scope.getNext();
 
 	});

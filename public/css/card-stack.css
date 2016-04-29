@@ -46,6 +46,9 @@ body {
     width:66px;
     height:66px;
 }
+#viewport li.neutral div.moodSelect  div {
+    display:none;
+}
 
 #viewport li.like div.moodSelect  div {
     background: transparent url(/graphics/like.png) ;
@@ -63,6 +66,13 @@ body {
     width: 100%;
     float: left;
 }
+
+
+#viewport li div.style_0 h3 {background-color:#F8E71C;}
+#viewport li div.style_1 h3 {background-color:#50E3C2;}
+#viewport li div.style_2 h3 {background-color:#4A90E2;}
+#viewport li div.style_3 h3 {background-color:#EE1D99;}
+
 #viewport li h3 {
     color:#000;
     background-color:#f8e71c;

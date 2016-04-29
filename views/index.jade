@@ -8,10 +8,9 @@ block content
 		div(id="viewport",  ng-controller="card-stack-playground")
 			ul(class="stack", swing-stack)
 
-
 				li(
-					class="item ng-class:mood;",
-					style="background-image:url(/img/lego_bg.jpeg) ",
+					class="item ng-class:mood;  ",
+					style="background-image:url('{{card.image}}')",
 					swing-card,
 					swing-on-throwout="throwout(eventName, eventObject)",
 					swing-on-throwoutleft="throwoutleft(eventName, eventObject)",
@@ -26,8 +25,7 @@ block content
 					)
 					div( class="moodSelect")
 						div
-					{{card.img}}
-					div( class="grad")
+					div( class="grad {{card.style}}" )
 						h3( class="noselect")
 							{{card.headline}} 
 						p( class="noselect")
